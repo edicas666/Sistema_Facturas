@@ -32,22 +32,50 @@
 		</select>
 		</div>
 	</form>
-	<a class="btn btn-success" id="agregar" href="#">Agregar</a>
 	<form action="" name="fromBuscar">
 		<div class="form-group">
 			<select id="selectCampo">
         <?php
-          $result=consultar($tabla);
+          $result=consultarcampos($tabla);
           while ($fila=mysqli_fetch_assoc($result)) {
             echo "<option>".$fila['Field']."</option>";
           }
+          mysqli_free_result($result);
          ?>
 			</select>
-		    <input type="text" placeholder="Buscar..." name="busTxt" id="busTxt">
-		    <button type="button" id="btnBuscar" class="btn btn-info">Buscar</button>
+		  <input type="text" placeholder="Buscar..." name="busTxt" id="busTxt">
+		  <button type="button" id="btnBuscar" class="btn btn-info">Buscar</button>
+      <a class="btn btn-success" id="agregar" href="#">Agregar</a>
 		</div>
     </form>
-    UNO
+    <?php
+      //Encabezado
+	    $result=consulta("SELECT * FROM $tabla");
+	    echo "<table class='table table-hover'>";
+	    echo "<thead><tr class='success' >";
+	    while($fila=mysqli_fetch_assoc($result)){
+	    	echo "<th>".$fila['Field']."</th>";
+	    }
+      mysqli_free_result($result);
+	    echo "<th colspan='2'></th></tr></thead>";
+      //datos
+	    $ren=consulta("SELECT * FROM $tabla");
+	    while($renglo=mysqli_fetch_array($ren)){
+	      echo "<tr>";
+	      $datos=consultar($tabla);
+	      while($fila=mysql_fetch_assoc($datos)){
+	    	echo "<td>".$renglo[$fila['Field']]."</td>";
+	      }
+        mysqli_free_result($result);
+        //Botones
+	      echo "<td>"."<input type='button' onclick='formmodCog.php' class='btn btn-warning' value ='Modificar'>"
+	                 ."</td>";
+	      echo "<td>"."<input type='button' class='btn btn-danger' value ='Eliminar'>"
+	                 ."</td>";
+	      echo "</tr>";
+	    }
+	    echo "</table>";
+    ?>
 </div>
 </div>
    <script>

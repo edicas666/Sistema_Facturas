@@ -1,7 +1,6 @@
 <?php
     function Conectarse(){
       $link = new mysqli("localhost","root","","sistema");
-
       if($link->connect_errno){
         echo "</script>alert('Error conectando a la Base de Datos: '".mysqli_connect_error()."'</script>";
         exit();
@@ -11,7 +10,7 @@
       return $link;
     }
 
-     function consultar($tabla){
+     function consultarcampos($tabla){
 	      $link=Conectarse();
         $sql = sprintf("describe %s",$tabla);
 	      $atributos = $link->query($sql);
@@ -19,19 +18,10 @@
 	      return $atributos;
     }
 
-    function con($tabla){
+    function consulta($sql){
 	      $link=Conectarse();
-	      $atributos = mysql_query("Select * from $tabla", $link);
-	      mysql_close($link);
+	      $atributos = $link->query($sql);
+	      $link->close();
 	      return $atributos;
-    }
-
-    function evaluarSelect(){
-    	  if(isset($_POST['submit'])) {
-        	echo "alerta se realizo un submit";
-        }
-        else{
-    	     echo "no se detecta ninguna acción";
-        }
     }
  ?>
