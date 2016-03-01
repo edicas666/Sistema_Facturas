@@ -1,25 +1,21 @@
 <?php
     function Conectarse(){
-      if(!($link=mysql_connect("localhost","root","harrison"))){
-        //echo "Error conectando a la Base de Datos...";
+      $link = new mysqli("localhost","root","","sistema");
+
+      if($link->connect_errno){
+        echo "</script>alert('Error conectando a la Base de Datos: '".mysqli_connect_error()."'</script>";
         exit();
       }else{
-        //echo "Conexión Exitosa...";
-        //echo "<br>";
+        echo "<script>alert('Conexion exitosa')</script>";
       }
-      if(!mysql_select_db("sistema",$link)){
-        //echo "Error seleccionando la Base de Datos...";
-        exit();
-      }else{
-        //echo "Selección correcta de la Base de Datos...";
-      }
-      
       return $link;
     }
+
      function consultar($tabla){
 	      $link=Conectarse();
-	      $atributos = mysql_query("describe $tabla", $link);
-	      mysql_close($link);
+        $sql = sprintf("describe %s",$tabla);
+	      $atributos = $link->query($sql);
+	      $link->close();
 	      return $atributos;
     }
 
@@ -31,12 +27,11 @@
     }
 
     function evaluarSelect(){
-    	  if(isset($_POST['submit'])) { 
-        	echo "alerta se realizo un sutmit";
+    	  if(isset($_POST['submit'])) {
+        	echo "alerta se realizo un submit";
         }
-    else{
-    	echo "no se detecta ninguna acción";
-    }
+        else{
+    	     echo "no se detecta ninguna acción";
+        }
     }
  ?>
-

@@ -1,15 +1,28 @@
 <?php
+  session_start();
   include_once "funciones.php";
   $user = $_POST['user'];
   $pass = $_POST['pass'];
+  //conexion
   $link = Conectarse();
   //$pass = sha1(md5($pass));
-  $query = sprintf("SELECT user FROM usuarios WHERE user='%s' AND pass='%s'", $user, $pass);
-  $result = mysql_query($query,$link);
-
-  if(mysql_num_rows($result) != 0){
-    echo "<br><h1>Bienvenido ".mysql_fetch_assoc($result)['user']."</h1>";
+  //consulta
+  $sql = sprintf("SELECT * FROM usuarios WHERE user='%s' AND pass='%s'",$user,$pass);
+  //resultado de consulta
+  if(!$res = $link->query($sql)){
+    echo "Error en el sistema";
   }else{
-    echo"No encontrado";
+    if($res->num_rows === 0) {
+      echo "Acceso Denegado";
+    }else{
+      $fila = $res->fetch_assoc();
+      $_SESSION['user'] = $fila['user'];
+      $_SESSION['pass'] = sha1(md5($fila['pass']));
+      $_SESSION['depto'] = $fila['depto'];
+      echo "<h1>"."Bienvenido ".$_SESSION['user'].$_SESSION['pass']."</h1>";
+      echo "<br>Usted esta siendo redireccionado";
+      header('Location:consultaGen.php?valor=formato');
+    }
   }
+  $link->close();
  ?>
