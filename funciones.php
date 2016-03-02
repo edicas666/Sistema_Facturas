@@ -5,7 +5,7 @@
         echo "</script>alert('Error conectando a la Base de Datos: '".mysqli_connect_error()."'</script>";
         exit();
       }else{
-        echo "<script>alert('Conexion exitosa')</script>";
+
       }
       return $link;
     }
