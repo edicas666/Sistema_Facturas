@@ -50,7 +50,7 @@
     </form>
     <?php
       //Encabezado
-	    $result=consulta("SELECT * FROM $tabla");
+	    $result=consultarcampos($tabla);
 	    echo "<table class='table table-hover'>";
 	    echo "<thead><tr class='success' >";
 	    while($fila=mysqli_fetch_assoc($result)){
@@ -62,11 +62,10 @@
 	    $ren=consulta("SELECT * FROM $tabla");
 	    while($renglo=mysqli_fetch_array($ren)){
 	      echo "<tr>";
-	      $datos=consultar($tabla);
-	      while($fila=mysql_fetch_assoc($datos)){
-	    	echo "<td>".$renglo[$fila['Field']]."</td>";
+	      $datos=consultarcampos($tabla);
+	      while($fila=mysqli_fetch_assoc($datos)){
+	    	    echo "<td>".$renglo[$fila['Field']]."</td>";
 	      }
-        mysqli_free_result($result);
         //Botones
 	      echo "<td>"."<input type='button' onclick='formmodCog.php' class='btn btn-warning' value ='Modificar'>"
 	                 ."</td>";
