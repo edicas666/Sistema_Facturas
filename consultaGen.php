@@ -48,33 +48,39 @@
       <a class="btn btn-success" id="agregar" href="#">Agregar</a>
 		</div>
     </form>
-    <?php
-      //Encabezado
-	    $result=consultarcampos($tabla);
-	    echo "<table class='table table-hover'>";
-	    echo "<thead><tr class='success' >";
-	    while($fila=mysqli_fetch_assoc($result)){
-	    	echo "<th>".$fila['Field']."</th>";
-	    }
-      mysqli_free_result($result);
-	    echo "<th colspan='2'></th></tr></thead>";
-      //datos
-	    $ren=consulta("SELECT * FROM $tabla");
-	    while($renglo=mysqli_fetch_array($ren)){
-	      echo "<tr>";
-	      $datos=consultarcampos($tabla);
-	      while($fila=mysqli_fetch_assoc($datos)){
-	    	    echo "<td>".$renglo[$fila['Field']]."</td>";
-	      }
-        //Botones
-	      echo "<td>"."<input type='button' onclick='formmodCog.php' class='btn btn-warning' value ='Modificar'>"
-	                 ."</td>";
-	      echo "<td>"."<input type='button' class='btn btn-danger' value ='Eliminar'>"
-	                 ."</td>";
-	      echo "</tr>";
-	    }
-	    echo "</table>";
-    ?>
+    <form class="" action="modelim.php" method="post">
+      <input type="text" name="id" id="idfila" value="">
+      <input type="hidden" name="tabla" value="<?php  echo $tabla; ?>">
+      <input type="hidden" name="modelim" value="">
+      <?php
+        //Encabezado
+  	    $result=consultarcampos($tabla);
+  	    echo "<table class='table table-hover'>";
+  	    echo "<thead><tr class='success' >";
+  	    while($fila=mysqli_fetch_assoc($result)){
+  	    	echo "<th>".$fila['Field']."</th>";
+  	    }
+        mysqli_free_result($result);
+  	    echo "<th colspan='2'></th></tr></thead>";
+        //datos
+  	    $ren=consulta("SELECT * FROM $tabla");
+  	    while($renglo=mysqli_fetch_array($ren)){
+  	      echo "<tr>";
+  	      $datos=consultarcampos($tabla);
+  	      while($fila=mysqli_fetch_assoc($datos)){
+  	    	    echo "<td>".$renglo[$fila['Field']]."</td>";
+  	      }
+          //Botones
+  	      echo "<td>"."<input type='button' onmouseover='$('#idfila').val('edi');' onclick='formmodCog.php' class='btn btn-warning' value ='Modificar'>"
+  	                 ."</td>";
+  	      echo "<td>"."<input type='button' class='btn btn-danger' value ='Eliminar'>"
+  	                 ."</td>";
+  	      echo "</tr>";
+  	    }
+  	    echo "</table>";
+      ?>
+    </form>
+
 </div>
 </div>
    <script>
