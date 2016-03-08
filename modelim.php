@@ -4,9 +4,10 @@
   $tabla = $_POST['tabla'];
   $id = $_POST['id'];
   $link=Conectarse();
+
   if($opcion==='elim'){
     $sql = sprintf("DELETE FROM %s WHERE id= %s",$tabla,$id);
-    link->query($sql);
+    $link->query($sql);
   }else{
     switch ($tabla) {
       case 'cog':
@@ -26,5 +27,6 @@
         break;
     }
   }
-  link->close();
+  $link->close();
+  header('Location:consultaGen.php?valor='.$tabla);
  ?>

@@ -48,10 +48,10 @@
       <a class="btn btn-success" id="agregar" href="#">Agregar</a>
 		</div>
     </form>
-    <form class="" action="modelim.php" method="post">
-    <!-- <input type="text" name="id" id="idfila" value="">
-      <input type="text" name="tabla" value="<?php  echo $tabla; ?>">
-      <input type="text" name="modelim" value="">-->
+    <form class="" action="modelim.php" method="post" name="formmodelim">
+      <input type="hidden" name="id" id="idfila" value="">
+      <input type="hidden" name="modelim" id="idopcion" value="">
+      <input type="hidden" name="tabla" value="<?php  echo $tabla; ?>">
 
       <?php
         //Encabezado
@@ -72,8 +72,8 @@
   	    	    echo "<td>".$renglo[$fila['Field']]."</td>";
   	      }
           $id=$renglo['id'];
-  	      echo "<td><input type='button' onmouseover=\"$('#idfila').val('$id')\" onclick='formmodCog.php' class='btn btn-warning' value ='Modificar'></td>";
-  	      echo "<td>"."<input type='button' class='btn btn-danger' value ='Eliminar'>"."</td>";
+  	      echo "<td><input type='button' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('mod');\" onclick=\"formmodelim.submit();\" class='btn btn-warning' value ='Modificar'></td>";
+  	      echo "<td>"."<input type='button' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('elim');\" onclick=\"formmodelim.submit();\" class='btn btn-danger' value ='Eliminar'>"."</td>";
   	      echo "</tr>";
   	    }
   	    echo "</table>";
