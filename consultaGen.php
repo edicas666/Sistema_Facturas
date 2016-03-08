@@ -50,8 +50,9 @@
     </form>
     <form class="" action="modelim.php" method="post">
       <input type="text" name="id" id="idfila" value="">
-      <input type="hidden" name="tabla" value="<?php  echo $tabla; ?>">
-      <input type="hidden" name="modelim" value="">
+      <input type="text" name="tabla" value="<?php  echo $tabla; ?>">
+      <input type="text" name="modelim" value="">
+
       <?php
         //Encabezado
   	    $result=consultarcampos($tabla);
@@ -70,11 +71,9 @@
   	      while($fila=mysqli_fetch_assoc($datos)){
   	    	    echo "<td>".$renglo[$fila['Field']]."</td>";
   	      }
-          //Botones
-  	      echo "<td>"."<input type='button' onmouseover='$('#idfila').val('edi');' onclick='formmodCog.php' class='btn btn-warning' value ='Modificar'>"
-  	                 ."</td>";
-  	      echo "<td>"."<input type='button' class='btn btn-danger' value ='Eliminar'>"
-  	                 ."</td>";
+          $id=$renglo['id'];
+  	      echo "<td><input type='button' onmouseover=\"$('#idfila').val('$id')\" onclick='formmodCog.php' class='btn btn-warning' value ='Modificar'></td>";
+  	      echo "<td>"."<input type='button' class='btn btn-danger' value ='Eliminar'>"."</td>";
   	      echo "</tr>";
   	    }
   	    echo "</table>";
