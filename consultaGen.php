@@ -49,9 +49,9 @@
 		</div>
     </form>
     <form class="" action="modelim.php" method="post">
-      <input type="text" name="id" id="idfila" value="">
+    <!-- <input type="text" name="id" id="idfila" value="">
       <input type="text" name="tabla" value="<?php  echo $tabla; ?>">
-      <input type="text" name="modelim" value="">
+      <input type="text" name="modelim" value="">-->
 
       <?php
         //Encabezado

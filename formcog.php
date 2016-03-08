@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/reg_usuario.css">
   <script src="js/funciones.js"></script>
+  <script src="js/jquery-1.12.1.min.js"></script>
   <title>Nuevo Registro COG</title>
 </head>
 <body>
@@ -16,26 +17,26 @@
       <div class="form-group">
         <label for="nombre" class="col-sm-2">* Cuenta:</label>
         <div class="col-sm-10">
-          <input id="idCuenta" type="text" name="cuenta" value="" placeholder="ejemplo: 10000-11301"
-          class="form-control" onKeyUp="javascript:validarCuenta('idCuenta')" maxlength="50">
+          <input id="idCuenta" type="text" name="cuenta"  placeholder="ejemplo: 10000-11301"
+          class="form-control" onkeypress="validarCaja()" onKeyUp="javascript:validarCuenta('idCuenta')" maxlength="50">
         </div>
       </div>
       <div class="form-group">
-        <label for="apaterno" class="col-sm-2">* Descripción de cuenta:</label>
+        <label for="apaterno" class="col-sm-2">* descripcion de cuenta:</label>
         <div class="col-sm-10">
-          <input type="text" name="descripción" value="" placeholder="ejemplo: Sueldos base" class="form-control" onkeypress="LetrasEspacios()" maxlength="40">
+          <input type="text" id="descripcion" name="descripcion" value="" placeholder="ejemplo: Sueldos base" class="form-control" onKeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="40">
         </div>
       </div>
       <div class="form-group">
         <label for="amaterno" class="col-sm-2">* Capitulo:</label>
         <div class="col-sm-10">
-          <input type="text" name="capitulo" value="" placeholder="ejemplo: 1000" class="form-control" onkeypress="validarNumeros()" maxlength="6">
+          <input type="text"  id="capitulo" name="capitulo" value="" placeholder="ejemplo: 1000" class="form-control" onkeypress="validarNumeros()" onKeyUP="validarCaja()" maxlength="6">
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
-          <button id="registrarbtn" type="submit" class="btn btn-success" >Registrar</button>
-          <button type="button" onclick="window.location='index.php'" class="btn btn-default">Regresar</button>
+          <button name="btnReg"  id="btnReg" disabled type="button" onclick="registrar()"  class="btn btn-success">Registrar</button>
+          <button type="button" onclick="window.location='consultaGen.php'" class="btn btn-default">Regresar</button>
         </div>
       </div>
       <div class="form-group">
@@ -44,8 +45,30 @@
     </form>
 </body>
 </html>
-<script type="text/javascript">
-  function registrar(){
-   
+<script>
+	function validarCaja() {
+			$(function() {
+		    jQuery.fn.extend({
+		        disable: function(state) {
+		            return this.each(function() {
+		                this.disabled = state;
+		            });
+		        }
+		    });
+		    if($("#idCuenta").val().length> 0 && $("#descripcion").val().length> 0 &&  $("#capitulo").val().length> 0){
+		    	 $('#btnReg').disable(false);
+
+		    }else{
+		    	$('#btnReg').disable(true);
+
+		    }
+
+		});
+		}
+
+	  function registrar(){
+	    if(confirm("¿Esta seguro de proceder?")){
+	      document.getElementById('form').submit();
+	    }
   }
 </script>

@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/reg_usuario.css">
   <script type="text/javascript" src="js/funciones.js"></script>
+  <script src="js/jquery-1.12.1.min.js"></script>
   <title>Nuevo Registro Proveedores</title>
 </head>
 <body>
@@ -16,19 +17,19 @@
       <div class="form-group">
         <label for="nombre" class="col-sm-2">* RFC:</label>
         <div class="col-sm-10">
-          <input type="text" name="nombre" value="" placeholder="CUPU800825569"class="form-control" onkeypress="LetrasNumeros()" maxlength="15">
+          <input type="text" id="rfc" name="rfc" value="" placeholder="CUPU800825569"class="form-control" onKeyUP="validarCaja()" onkeypress="LetrasNumeros()" maxlength="15">
         </div>
       </div>
       <div class="form-group">
         <label for="apaterno" class="col-sm-2">* Nombre:</label>
         <div class="col-sm-10">
-          <input type="text" name="apaterno" value="" placeholder="Persona u organización" class="form-control" onkeypress="LetrasEspacios()" maxlength="40 ">
+          <input type="text" id="nombre" name="nombre" value="" placeholder="Persona u organización" class="form-control" onKeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="40 ">
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
-          <button id="registrarbtn" type="button" class="btn btn-success" onclick="registrar()">Registrar</button>
-          <button type="button" onclick="window.location='index.php'" class="btn btn-default">Regresar</button>
+          <button name="btnReg"  id="btnReg" disabled type="button" onclick="registrar()"  class="btn btn-success">Registrar</button>
+          <button type="button" onclick="window.location='consultaGen.php'" class="btn btn-default">Regresar</button>
         </div>
       </div>
       <div class="form-group">
@@ -38,9 +39,26 @@
 </body>
 </html>
 <script type="text/javascript">
-  function registrar(){
-    if(confirm("¿Esta seguro?")){
-      document.getElementById('form').submit();
-    }
+  function validarCaja() {
+			$(function() {
+		    jQuery.fn.extend({
+		        disable: function(state) {
+		            return this.each(function() {
+		                this.disabled = state;
+		            });
+		        }
+		    });
+		    if($("#rfc").val().length> 0 && $("#nombre").val().length> 0){
+		    	 $('#btnReg').disable(false);
+		    }else{
+		    	$('#btnReg').disable(true);
+        }
+		});
+		}
+
+	  function registrar(){
+	    if(confirm("¿Esta seguro de proceder?")){
+	      document.getElementById('form').submit();
+	    }
   }
 </script>

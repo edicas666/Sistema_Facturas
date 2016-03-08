@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/reg_usuario.css">
   <script type="text/javascript" src="js/funciones.js"></script>
+  <script src="js/jquery-1.12.1.min.js"></script>
   <title>Nuevo Registro Formato</title>
 </head>
 <body>
@@ -16,28 +17,28 @@
       <div class="form-group">
         <label for="nombre" class="col-sm-2">Nombre(s):</label>
         <div class="col-sm-10">
-          <input type="text" name="nombre" value="" placeholder="Gerardo" class="form-control" onkeypress="LetrasEspacios()" maxlength="40">
+          <input id="nombre" name="nombre" type="text"   placeholder="Gerardo" class="form-control" onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="40">
         </div>
       </div>
       <div class="form-group">
         <label for="apaterno" class="col-sm-2">Apellido Paterno:</label>
         <div class="col-sm-10">
-          <input type="text" name="apaterno" value="" placeholder="Ruiz" class="form-control" onkeypress="validarLetras()" maxlength="14">
+          <input type="text"  id="apaterno" name="apaterno" value="" placeholder="Ruiz" class="form-control"  onkeyUP="validarCaja()" onkeypress="validarLetras()" maxlength="14">
         </div>
       </div>
       <div class="form-group">
         <label for="amaterno" class="col-sm-2">Apellido Materno:</label>
         <div class="col-sm-10">
-          <input type="text" name="amaterno" value="" placeholder="Pérez" class="form-control" onkeypress="validarLetras()" maxlength="14">
+          <input type="text" id="amaterno" name="amaterno" value="" placeholder="Pérez" class="form-control" onkeyUP="validarCaja()"onkeypress="validarLetras()" maxlength="14">
         </div>
       </div>
       <div class="form-group">
         <label for="email" class="col-sm-2">Email:</label>
         <div class="col-sm-10">
-          <input type="text" name="email" value="" placeholder="usuario@gmail.com"
-           class="form-control" onKeyUp="javascript:validateMail('id_mail')" 
-           required name="emailClie" id="id_mail" maxlength="50" 
-           pattern="[a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" 
+          <input type="text" id="email" name="email" value="" placeholder="usuario@gmail.com" onkeyUP="validarCaja()"
+           class="form-control" onKeyUp="javascript:validateMail('id_mail')"
+           required name="emailClie" id="id_mail" maxlength="50"
+           pattern="[a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
            min="8">
         </div>
       </div>
@@ -54,25 +55,25 @@
       <div class="form-group">
         <label for="usuario" class="col-sm-2">* Nombre de usuario:</label>
         <div class="col-sm-10">
-          <input type="text" name="user" required value="" placeholder="gera23" class="form-control" onkeypress="LetrasNumeros()" maxlength="40">
+          <input type="text" id="user" name="user" required value="" placeholder="gera23" class="form-control"onkeyUP="validarCaja()"  onkeypress="LetrasNumeros()" maxlength="40">
         </div>
       </div>
       <div class="form-group">
         <label for="pass" class="col-sm-2">* Contraseña:</label>
         <div class="col-sm-10">
-          <input type="password" name="pass1" required class="form-control" id="pass" placeholder="*****" maxlength="80">
+          <input type="password" id="pass1" name="pass1" required class="form-control"  onkeyUP="validarCaja()" placeholder="*****" maxlength="80">
         </div>
       </div>
       <div class="form-group">
         <label for="pass2" class="col-sm-2">* Confirmar contraseña:</label>
         <div class="col-sm-10">
-          <input type="password" name="pass2" required class="form-control" id="pass2" placeholder="*****" maxlength="80">
+          <input type="password" id="pass2" name="pass2" required class="form-control" onkeyUP="validarCaja()" placeholder="*****" maxlength="80">
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
-          <button id="registrarbtn" type="button" class="btn btn-success" onclick="registrar()">Registrar</button>
-          <button type="button" onclick="window.location='index.php'" class="btn btn-default">Regresar</button>
+         <button name="btnReg"  id="btnReg" disabled type="button" onclick="registrar()"  class="btn btn-success">Registrar</button>
+         <button type="button" onclick="window.location='consultaGen.php'" class="btn btn-default">Regresar</button>
         </div>
       </div>
       <div class="form-group">
@@ -82,9 +83,32 @@
 </body>
 </html>
 <script type="text/javascript">
+function validarCaja() {
+    $(function() {
+      jQuery.fn.extend({
+          disable: function(state) {
+              return this.each(function() {
+                  this.disabled = state;
+              });
+          }
+      });
+        if($("#nombre").val().length> 0 &&
+        $("#apaterno").val().length> 0 &&
+        $("#amaterno").val().length> 0 &&
+        $("#email").val().length> 0  &&
+        $("#user").val().length> 0){
+              $('#btnReg').disable(false);
+      }else{
+        $('#btnReg').disable(true);
+
+      }
+
+  });
+  }
+
   function registrar(){
-    if(confirm("¿Esta seguro?")){
+    if(confirm("¿Esta seguro de proceder?")){
       document.getElementById('form').submit();
     }
-  }
+}
 </script>
