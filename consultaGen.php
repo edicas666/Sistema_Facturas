@@ -73,7 +73,7 @@
   	      }
           $id=$renglo['id'];
   	      echo "<td><input type='button' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('mod');\" onclick=\"formmodelim.submit();\" class='btn btn-warning' value ='Modificar'></td>";
-  	      echo "<td>"."<input type='button' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('elim');\" onclick=\"formmodelim.submit();\" class='btn btn-danger' value ='Eliminar'>"."</td>";
+  	      echo "<td>"."<input type='button' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('elim');\" onclick=\"if(confirm('esta seguro?')){formmodelim.submit();}\" class='btn btn-danger' value ='Eliminar'>"."</td>";
   	      echo "</tr>";
   	    }
   	    echo "</table>";

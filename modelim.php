@@ -29,5 +29,5 @@
     }
   }
   $link->close();
-  //header('Location:consultaGen.php?valor='.$tabla);
+  header('Location:consultaGen.php?valor='.$tabla);
  ?>
