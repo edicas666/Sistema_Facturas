@@ -73,7 +73,7 @@
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
          <button name="btnReg"  id="btnReg" disabled type="button" onclick="registrar()"  class="btn btn-success">Registrar</button>
-         <button type="button" onclick="window.location='consultaGen.php'" class="btn btn-default">Regresar</button>
+         <button type="button" onclick="history.back()" class="btn btn-default">Regresar</button>
         </div>
       </div>
       <div class="form-group">

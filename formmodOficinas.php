@@ -34,7 +34,7 @@
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
           <button id="registrarbtn" type="button" class="btn btn-success" onclick="Modificar()">Modificar</button>
-          <button type="button" onclick="window.location='index.php'" class="btn btn-default">Regresar</button>
+          <button type="button" onclick="history.back()" class="btn btn-default">Regresar</button>
         </div>
       </div>
       <div class="form-group">
