@@ -3,6 +3,11 @@
   if(!empty($_SESSION['user']) && !empty($_SESSION['pass'])){
     include_once "funciones.php";
     $tabla = $_GET['valor'];
+    $bus = $_GET['bus'];
+    if($bus=='yes'){
+      $bustxt = $_GET['bustxt'];
+      $buscampo = $_GET['cam'];
+    }
  ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,6 +29,7 @@
    <div class="col-md-10 col-md-offset-1 col-xs-12">
  	<form   method="get" action="consultaGen.php">
  		<div class="form-group">
+      <label for="entidad">Tabla:</label>
 	    <select name="entidad" id="entidad">
 			  <option value="cog">Cog</option>
 			  <option value="formato">Formato</option>
@@ -32,8 +38,10 @@
 		</select>
 		</div>
 	</form>
-	<form action="" name="fromBuscar">
+  <hr>
+	<form action="buscar.php" name="fromBuscar" method="get">
 		<div class="form-group">
+      <label for="selectCampo">Campo:</label>
 			<select id="selectCampo">
         <?php
           $result=consultarcampos($tabla);
@@ -43,12 +51,15 @@
           mysqli_free_result($result);
          ?>
 			</select>
-		  <input type="text" placeholder="Buscar..." name="busTxt" id="busTxt">
-		  <button type="button" id="btnBuscar" class="btn btn-info">Buscar</button>
+		  <input type="text" placeholder="Buscar..." name="bustxt" id="busTxt">
+      <input type="hidden" name="tabla" value="<?php echo $tabla; ?>">
+      <input type="hidden" name="campo" id="idcampo" value="">
+		  <button id="btnBuscar" onmouseover="$('#idcampo').val($('#selectCampo').val())" class="btn btn-info">Buscar</button>
       <a class="btn btn-success" id="agregar" href="#">Agregar</a>
       <a class="btn btn-success" id="prueba" href="datos-de-factura_comprometido.php">Formato</a>
 		</div>
     </form>
+    <hr>
     <form class="" action="modelim.php" method="post" name="formmodelim">
       <input type="hidden" name="id" id="idfila" value="">
       <input type="hidden" name="modelim" id="idopcion" value="">
@@ -65,7 +76,11 @@
         mysqli_free_result($result);
   	    echo "<th colspan='2'></th></tr></thead>";
         //datos
-  	    $ren=consulta("SELECT * FROM $tabla");
+        if($bus=='yes'){
+          $ren=buscar($tabla,$buscampo,$bustxt);
+        }else{
+          $ren=consulta("SELECT * FROM $tabla");
+        }
   	    while($renglo=mysqli_fetch_array($ren)){
   	      echo "<tr>";
   	      $datos=consultarcampos($tabla);
@@ -87,7 +102,7 @@
   	    $('#contPanel').css('margin-top','100px');
     	$('select#entidad').on('change',function(){
 		    var valor = $(this).val();
-		    window.location.href="consultaGen.php?valor="+valor;
+		    window.location.href="consultaGen.php?bus=no&valor="+valor;
 		});
 		$(document).ready(function(){
 			$('#entidad').val('<?php echo "$tabla" ?>');

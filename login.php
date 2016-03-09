@@ -21,7 +21,7 @@
       $_SESSION['depto'] = $fila['depto'];
       echo "<h1>"."Bienvenido ".$_SESSION['user'].$_SESSION['pass']."</h1>";
       echo "<br>Usted esta siendo redireccionado";
-      header('Location:consultaGen.php?valor=formato');
+      header('Location:consultaGen.php?valor=formato&bus=no');
     }
   }
   $link->close();

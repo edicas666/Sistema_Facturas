@@ -24,4 +24,12 @@
 	      $link->close();
 	      return $atributos;
     }
+
+    function buscar($tabla,$campo,$bustxt){
+      $link=Conectarse();
+      $sql = sprintf("SELECT * FROM %s WHERE %s LIKE '%s'", $tabla, $campo, $bustxt);
+      $result = $link->query($sql);
+      $link->close();
+      return $result;
+    }
  ?>
