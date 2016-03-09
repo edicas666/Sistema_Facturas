@@ -16,24 +16,24 @@
       <div class="form-group">
         <label for="nombre" class="col-sm-2">* Nombre:</label>
         <div class="col-sm-10">
-          <input type="text" name="nombre" value="" placeholder="Administración" class="form-control" onkeypress="LetrasEspacios()" maxlength="40">
+          <input type="text" id="nombre" name="nombre" value="" placeholder="Administración" class="form-control" onkeypress="LetrasEspacios()" maxlength="40">
         </div>
       </div>
       <div class="form-group">
-        <label for="apaterno" class="col-sm-2">* Director:</label>
+        <label for="director" class="col-sm-2">* Director:</label>
         <div class="col-sm-10">
-          <input type="text" name="apaterno" value="" placeholder="ejemplo: PROFR. J GUADALUPE ENRIQUEZ VALDEZ" class="form-control" onkeypress="LetrasEspacios()" maxlength="60">
+          <input type="text" id="director" name="director" value="" placeholder="ejemplo: PROFR. J GUADALUPE ENRIQUEZ VALDEZ" class="form-control" onkeypress="LetrasEspacios()" maxlength="60">
         </div>
       </div>
       <div class="form-group">
-        <label for="amaterno" class="col-sm-2">   Recibe:</label>
+        <label for="recibe" class="col-sm-2">   Recibe:</label>
         <div class="col-sm-10">
-          <input type="text" name="amaterno" value="" placeholder="ejemplo: MANUEL GARCIA FLORES" class="form-control" onkeypress="LetrasEspacios()" maxlength="60">
+          <input type="text" id="recibe" name="recibe" value="" placeholder="ejemplo: MANUEL GARCIA FLORES" class="form-control" onkeypress="LetrasEspacios()" maxlength="60">
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
-          <button id="registrarbtn" type="button" class="btn btn-success" onclick="Modificar()">Modificar</button>
+          <button id="btnmod" type="button" class="btn btn-success" onclick="Modificar()">Modificar</button>
           <button type="button" onclick="history.back()" class="btn btn-default">Regresar</button>
         </div>
       </div>
@@ -44,6 +44,26 @@
 </body>
 </html>
 <script type="text/javascript">
+function validarCaja() {
+    $(function() {
+      jQuery.fn.extend({
+          disable: function(state) {
+              return this.each(function() {
+                  this.disabled = state;
+              });
+          }
+      });
+      if($("#nombre").val().length> 0 && $("#director").val().length> 0 &&  $("#recibe").val().length> 0){
+         $('#btnmod').disable(false);
+
+      }else{
+        $('#btnmod').disable(true);
+
+      }
+
+  });
+  }
+
   function Modificar(){
     if(confirm("¿Esta seguro?")){
       document.getElementById('form').submit();

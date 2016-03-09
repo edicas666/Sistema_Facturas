@@ -82,6 +82,26 @@
 </body>
 </html>
 <script type="text/javascript">
+	function validarCaja() {
+			$(function() {
+		    jQuery.fn.extend({
+		        disable: function(state) {
+		            return this.each(function() {
+		                this.disabled = state;
+		            });
+		        }
+		    });
+		    if($("#idCuenta").val().length> 0 && $("#descripcion").val().length> 0 &&  $("#capitulo").val().length> 0){
+		    	 $('#btnReg').disable(false);
+
+		    }else{
+		    	$('#btnReg').disable(true);
+
+		    }
+
+		});
+		}
+
   function Modificar(){
     if(confirm("¿Esta seguro?")){
       document.getElementById('form').submit();

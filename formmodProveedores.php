@@ -16,18 +16,18 @@
       <div class="form-group">
         <label for="nombre" class="col-sm-2">* RFC:</label>
         <div class="col-sm-10">
-          <input type="text" name="nombre" value="" placeholder="CUPU800825569"class="form-control" onkeypress="LetrasNumeros()" maxlength="15">
+          <input type="text" id="rfc" name="rfc" value="" placeholder="CUPU800825569"class="form-control" onkeypress="LetrasNumeros()" maxlength="15">
         </div>
       </div>
       <div class="form-group">
         <label for="apaterno" class="col-sm-2">* Nombre:</label>
         <div class="col-sm-10">
-          <input type="text" name="apaterno" value="" placeholder="Persona u organización" class="form-control" onkeypress="LetrasEspacios()" maxlength="40">
+          <input type="text" id="nombre" name="nombre" value="" placeholder="Persona u organización" class="form-control" onkeypress="LetrasEspacios()" maxlength="40">
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
-          <button id="registrarbtn" type="button" class="btn btn-success" onclick="Modificar()">Modificar</button>
+          <button id="btnmod" type="button" class="btn btn-success" onclick="Modificar()">Modificar</button>
           <button type="button" onclick="history.back()" class="btn btn-default">Regresar</button>
         </div>
       </div>
@@ -38,6 +38,23 @@
 </body>
 </html>
 <script type="text/javascript">
+function validarCaja() {
+			$(function() {
+		    jQuery.fn.extend({
+		        disable: function(state) {
+		            return this.each(function() {
+		                this.disabled = state;
+		            });
+		        }
+		    });
+		    if($("#rfc").val().length> 0 && $("#nombre").val().length> 0){
+		    	 $('#btnmod').disable(false);
+		    }else{
+		    	$('#btnmod').disable(true);
+        }
+		});
+		}
+
   function Modificar(){
     if(confirm("¿Esta seguro?")){
       document.getElementById('form').submit();
