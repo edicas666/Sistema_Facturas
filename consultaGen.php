@@ -46,6 +46,7 @@
 		  <input type="text" placeholder="Buscar..." name="busTxt" id="busTxt">
 		  <button type="button" id="btnBuscar" class="btn btn-info">Buscar</button>
       <a class="btn btn-success" id="agregar" href="#">Agregar</a>
+      <a class="btn btn-success" id="prueba" href="datos-de-factura_comprometido.php">Formato</a>
 		</div>
     </form>
     <form class="" action="modelim.php" method="post" name="formmodelim">

@@ -11,63 +11,73 @@
   <title>Nuevo Registro Formato</title>
 </head>
 <body>
-    <form class="form-horizontal" action="crear_usuarios.php" method="post" id="form">
-      <h1>Formato</h1>
+    <form class="form-horizontal" action="registros/registrarFormato.php" method="post" id="form">
+      <h1>Nuevo Formato</h1>
       <br>
       <div class="form-group">
-        <label for="nombre" class="col-sm-2">Nombre(s):</label>
+        <label for="ur" class="col-sm-2">* Ur:</label>
         <div class="col-sm-10">
-          <input id="nombre" name="nombre" type="text"   placeholder="Gerardo" class="form-control" onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="40">
+          <input id="ur" name="ur" type="text"  placeholder="Dirección de comunicación social" class="form-control" onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="40">
         </div>
       </div>
       <div class="form-group">
-        <label for="apaterno" class="col-sm-2">Apellido Paterno:</label>
+        <label for="acc" class="col-sm-2">* Acc:</label>
         <div class="col-sm-10">
-          <input type="text"  id="apaterno" name="apaterno" value="" placeholder="Ruiz" class="form-control"  onkeyUP="validarCaja()" onkeypress="validarLetras()" maxlength="14">
+          <input type="text"  id="acc" name="acc" value="" placeholder="Gastos operativos" class="form-control"  onkeyUP="validarCaja()" onkeypress="validarLetras()" maxlength="14">
         </div>
       </div>
       <div class="form-group">
-        <label for="amaterno" class="col-sm-2">Apellido Materno:</label>
+        <label for="oficio" class="col-sm-2">* Oficio:</label>
         <div class="col-sm-10">
-          <input type="text" id="amaterno" name="amaterno" value="" placeholder="Pérez" class="form-control" onkeyUP="validarCaja()"onkeypress="validarLetras()" maxlength="14">
+          <input type="text" id="oficio" name="oficio" placeholder="Descripción del oficio" class="form-control" onkeyUP="validarCaja()"onkeypress="validarLetras()" maxlength="14">
         </div>
       </div>
       <div class="form-group">
-        <label for="email" class="col-sm-2">Email:</label>
+        <label for="fecha" class="col-sm-2">* Fecha:</label>
+          <div class="col-sm-10">
+            <input  disabled="" type="datetime" id="fecha" name="fecha" value="<?php echo date("Y-m-d");?>" class="form-control">
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="anioFiscal" class="col-sm-2">* Año fiscal:</label>
         <div class="col-sm-10">
-          <input type="text" id="email" name="email" value="" placeholder="usuario@gmail.com" onkeyUP="validarCaja()"
-           class="form-control" onKeyUp="javascript:validateMail('id_mail')"
-           required name="emailClie" id="id_mail" maxlength="50"
-           pattern="[a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
-           min="8">
+            <select class="form-control" name="id_oficina" required>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+            </select>
         </div>
       </div>
       <div class="form-group">
-        <label for="deptotxt" class="col-sm-2">* Departamento:</label>
+        <label for="deptotxt" class="col-sm-2">* Id_cog:</label>
         <div class="col-sm-10">
-          <select class="form-control" name="depto" required>
-            <option value="presidencia">Presidencia</option>
-            <option value="tesoreria">Tesoreria</option>
-            <option value="oficialia">Oficialia</option>
+          <select class="form-control" name="id_cog" required>
+            <option value="presidencia">codigo1</option>
+            <option value="tesoreria">codigo2</option>
+            <option value="oficialia">codigo3</option>
           </select>
         </div>
       </div>
       <div class="form-group">
-        <label for="usuario" class="col-sm-2">* Nombre de usuario:</label>
+        <label for="descripcion" class="col-sm-2">* Descripción:</label>
         <div class="col-sm-10">
-          <input type="text" id="user" name="user" required value="" placeholder="gera23" class="form-control"onkeyUP="validarCaja()"  onkeypress="LetrasNumeros()" maxlength="40">
+          <input type="text" id="descripcion" name="descripcion" required placeholder="Descripción de la cuenta" class="form-control"onkeyUP="validarCaja()"  onkeypress="LetrasNumeros()" maxlength="40">
         </div>
       </div>
       <div class="form-group">
-        <label for="pass" class="col-sm-2">* Contraseña:</label>
+        <label for="cantidad" class="col-sm-2">* Cantidad:</label>
         <div class="col-sm-10">
-          <input type="password" id="pass1" name="pass1" required class="form-control"  onkeyUP="validarCaja()" placeholder="*****" maxlength="80">
+          <input type="cantidad" id="cantidad" name="cantidad" required class="form-control"  onkeyUP="validarCaja()" placeholder="100" maxlength="80">
         </div>
       </div>
       <div class="form-group">
-        <label for="pass2" class="col-sm-2">* Confirmar contraseña:</label>
+        <label for="deptotxt" class="col-sm-2">* Id_oficina:</label>
         <div class="col-sm-10">
-          <input type="password" id="pass2" name="pass2" required class="form-control" onkeyUP="validarCaja()" placeholder="*****" maxlength="80">
+          <select class="form-control" name="id_oficina" required>
+            <option value="presidencia">codigo1</option>
+            <option value="tesoreria">codigo2</option>
+            <option value="oficialia">codigo3</option>
+          </select>
         </div>
       </div>
       <div class="form-group">
@@ -92,15 +102,15 @@ function validarCaja() {
               });
           }
       });
-        if($("#nombre").val().length> 0 &&
-        $("#apaterno").val().length> 0 &&
-        $("#amaterno").val().length> 0 &&
-        $("#email").val().length> 0  &&
-        $("#user").val().length> 0){
+        if($("#ur").val().length> 0 &&
+        $("#acc").val().length> 0 &&
+        $("#oficio").val().length> 0 &&
+        $("#fecha").val().length> 0  &&
+        $("#descripcion").val().length> 0 &&
+        $("#cantidad1").val().length==0){
               $('#btnReg').disable(false);
       }else{
         $('#btnReg').disable(true);
-
       }
 
   });
