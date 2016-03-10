@@ -12,19 +12,26 @@
   </head>
   <body>
    <?php
-     include_once "../funciones.php";
-   $link = Conectarse();
-   if(isset($_POST['nombre']) && !empty($_POST['nombre']) && isset($_POST['director']) && !empty($_POST['director']) && isset($_POST['recibe']) && !empty($_POST['recibe']) ){
-   	  $nombre = $_POST['nombre'];
-      $director =  $_POST['director'];
-      $recibe = $_POST['recibe'];
-      $sql = "INSERT INTO cog(id,nombre,director,recibe) values('','$nombre','$director','$recibe')";
-      $link->query($sql);
-      $link->close();
-      header('Location: ../formOficinas.php');
-   }else{
+    if(isset($_POST['cuenta']) && !empty($_POST['cuenta']) && isset($_POST['descripción']) && !empty($_POST['descripción']) && isset($_POST['capitulo']) && !empty($_POST['capitulo']) ){
+      include_once "funciones.php";
+      $lik = Conectarse();
+      
+      $cuenta = $_POST['cuenta'];
+      $nombre =  $_POST['descripción']; 
+      $capitulo = $_POST['capitulo'];
+      
+      $sql = "INSERT INTO cog(id,nombre,capitulo) values('$cuenta','$nombre','$capitulo')";
+      
+      mysql_query($sql,$lik);
+        
+      
+      header('Location: formCog.php');
+      
+    }else{
       echo "debe de llenar todos los campos";
-   }
+    }
+    
+    
     ?>
   </body>
 </html>

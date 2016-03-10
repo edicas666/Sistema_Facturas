@@ -12,18 +12,26 @@
   </head>
   <body>
    <?php
-    include_once "../funciones.php";
-   $link = Conectarse();
-   if(isset($_POST['rfc']) && !empty($_POST['rfc']) && isset($_POST['nombre']) && !empty($_POST['nombre'])){
-   	  $rfc = $_POST['rfc'];
-      $nombre =  $_POST['nombre'];
-      $sql = "INSERT INTO cog(rfc,nombre) values('$rfc','$nombre')";
-      $link->query($sql);
-      $link->close();
-      header('Location: ../formProveedor.php');
-   }else{
+    if(isset($_POST['cuenta']) && !empty($_POST['cuenta']) && isset($_POST['descripción']) && !empty($_POST['descripción']) && isset($_POST['capitulo']) && !empty($_POST['capitulo']) ){
+      include_once "funciones.php";
+      $lik = Conectarse();
+      
+      $cuenta = $_POST['cuenta'];
+      $nombre =  $_POST['descripción']; 
+      $capitulo = $_POST['capitulo'];
+      
+      $sql = "INSERT INTO cog(id,nombre,capitulo) values('$cuenta','$nombre','$capitulo')";
+      
+      mysql_query($sql,$lik);
+        
+      
+      header('Location: formCog.php');
+      
+    }else{
       echo "debe de llenar todos los campos";
-   }
+    }
+    
+    
     ?>
   </body>
 </html>
