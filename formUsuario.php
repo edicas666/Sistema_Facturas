@@ -35,7 +35,7 @@
       <div class="form-group">
         <label for="email" class="col-sm-2">Email:</label>
         <div class="col-sm-10">
-          <input type="text" id="email" name="email" value="" placeholder="usuario@gmail.com" onkeyUP="validarCaja()"
+          <input type="email" id="email" name="email" value="" placeholder="usuario@gmail.com" onkeyUP="validarCaja()"
            class="form-control" onKeyUp="javascript:validateMail('id_mail')"
            required name="emailClie" id="id_mail" maxlength="50"
            pattern="[a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
