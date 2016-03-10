@@ -4,12 +4,15 @@
   $tabla = $_POST['tabla'];
   $id = $_POST['id'];
   $link=Conectarse();
-  echo "$id";
-  echo "$opcion";
   if($opcion == 'elim'){
     $sql = sprintf("DELETE FROM %s WHERE id= '%s'",$tabla,$id);
     $link->query($sql);
-  }else{
+    header('Location:consultaGen.php?valor='.$tabla);
+  }
+  if($opcion == 'form'){
+    header('Location:datos-de-factura_comprometido.php?idform='.$id);
+  }
+  if($opcion == 'mod'){
     switch ($tabla) {
       case 'cog':
           header('Location:formmodCog.php?id='.$id);
@@ -29,5 +32,4 @@
     }
   }
   $link->close();
-  header('Location:consultaGen.php?valor='.$tabla);
  ?>
