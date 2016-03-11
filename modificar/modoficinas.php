@@ -6,10 +6,12 @@
 	  $nombre = $_POST['nombre'];
     $director =  $_POST['director'];
     $recibe = $_POST['recibe'];
-    $sql = "INSERT INTO oficinas(nombre,director,recibe) values('$nombre','$director','$recibe')";
+    $idtab = $_POST['idmod'];
+    $sql = "UPDATE oficinas SET nombre='$nombre', director='$director', recibe='$recibe' WHERE id='$idtab'";
     $link->query($sql);
     $link->close();
-    header('Location: ../formOficinas.php');
+    print_r($_POST);
+    header('Location: ../consultaGen.php?valor=oficinas&bus=no');
  }else{
     echo "debe de llenar todos los campos";
  }

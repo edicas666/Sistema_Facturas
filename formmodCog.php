@@ -1,3 +1,12 @@
+<?php
+  $id=$_GET['id'];
+  include_once "funciones.php";
+  $link = Conectarse();
+  $sql = sprintf("SELECT * FROM cog WHERE id='%s'",$id);
+  $result = $link->query($sql);
+  $fila = mysqli_fetch_assoc($result);
+  $link->close();
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,26 +19,26 @@
   <title>Modificar COG</title>
 </head>
 <body>
-    <form class="form-horizontal" action="crear_usuarios.php" method="post" id="form">
+    <form class="form-horizontal" action="modificar/modoficinas.php" method="post" id="form">
       <h1>Modificar COG</h1>
       <br>
       <div class="form-group">
         <label for="idCuenta" class="col-sm-2">* Cuenta:</label>
         <div class="col-sm-10">
-          <input id="idCuenta" type="text" name="nombre" value="" placeholder="ejemplo: 10000-11301"class="form-control" 
+          <input id="idCuenta" type="text" name="nombre" value="<?php echo "$id"; ?>" placeholder="ejemplo: 10000-11301"class="form-control"
           onKeyUp="javascript:validarCuenta('idCuenta')" maxlength="50">
         </div>
       </div>
       <div class="form-group">
         <label for="descripcion" class="col-sm-2">* Descripción de cuenta:</label>
         <div class="col-sm-10">
-          <input type="text" id="descripcion" name="descripcion" value="" placeholder="ejemplo: Sueldos base" class="form-control" onkeypress="LetrasEspacios()" maxlength="40">
+          <input type="text" id="descripcion" name="descripcion" value="<?php  echo "".$fila['nombre'];?>" placeholder="ejemplo: Sueldos base" class="form-control" onkeypress="LetrasEspacios()" maxlength="40">
         </div>
       </div>
       <div class="form-group">
         <label for="capitulo" class="col-sm-2">* Capitulo:</label>
         <div class="col-sm-10">
-          <input type="text" id="capitulo" name="capitulo" value="" placeholder="ejemplo: 1000" class="form-control" onkeypress="validarNumeros()" maxlength="6">
+          <input type="text" id="capitulo" name="capitulo" value="<?php  echo "".$fila['capitulo'];?>" placeholder="ejemplo: 1000" class="form-control" onkeypress="validarNumeros()" maxlength="6">
         </div>
       </div>
       <div class="form-group">
