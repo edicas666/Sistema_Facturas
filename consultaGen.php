@@ -56,7 +56,6 @@
       <input type="hidden" name="campo" id="idcampo" value="">
 		  <button id="btnBuscar" onmouseover="$('#idcampo').val($('#selectCampo').val())" class="btn btn-info">Buscar</button>
       <a class="btn btn-success" id="agregar" href="#">Agregar</a>
-      <a class="btn btn-success" id="prueba" href="datos-de-factura_comprometido.php">Formato</a>
 		</div>
     </form>
     <hr>

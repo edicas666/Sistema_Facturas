@@ -23,13 +23,13 @@
       <div class="form-group">
         <label for="acc" class="col-sm-2">* Acc:</label>
         <div class="col-sm-10">
-          <input type="text"  id="acc" name="acc" value="" placeholder="Gastos operativos" class="form-control"  onkeyUP="validarCaja()" onkeypress="validarLetras()" maxlength="14">
+          <input type="text"  id="acc" name="acc" value="" placeholder="Gastos operativos" class="form-control"  onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="14">
         </div>
       </div>
       <div class="form-group">
         <label for="oficio" class="col-sm-2">* Oficio:</label>
         <div class="col-sm-10">
-          <input type="text" id="oficio" name="oficio" placeholder="Descripción del oficio" class="form-control" onkeyUP="validarCaja()"onkeypress="validarLetras()" maxlength="14">
+          <input type="text" id="oficio" name="oficio" placeholder="Descripción del oficio" class="form-control" onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="14">
         </div>
       </div>
       <div class="form-group">
@@ -51,17 +51,30 @@
       <div class="form-group">
         <label for="deptotxt" class="col-sm-2">* Id_cog:</label>
         <div class="col-sm-10">
-          <select class="form-control" name="id_cog" required>
-            <option value="presidencia">codigo1</option>
-            <option value="tesoreria">codigo2</option>
-            <option value="oficialia">codigo3</option>
+          <select id="codigo" name="codigo" class="form-control" name="id_cog" required onclick="validarCaja()">
+            <option value="a">Seleccionar código</option>
+            <?php
+              include_once "funciones.php";
+              $link = Conectarse();
+
+              ?>
+              <?php
+                $sql = "SELECT id FROM cog ORDER BY id ASC";
+                $result=$link->query($sql);
+                while($codigo = mysqli_fetch_assoc($result)) {
+             ?>
+                <option value = "<?php echo $codigo['id']; ?>"><?php echo $codigo['id']; ?></option>
+             <?php
+              }
+              $link->close();
+            ?>
           </select>
         </div>
       </div>
       <div class="form-group">
         <label for="descripcion" class="col-sm-2">* Descripción:</label>
         <div class="col-sm-10">
-          <input type="text" id="descripcion" name="descripcion" required placeholder="Descripción de la cuenta" class="form-control"onkeyUP="validarCaja()"  onkeypress="LetrasNumeros()" maxlength="40">
+          <input type="text" id="descripcion" name="descripcion" required placeholder="Descripción de la cuenta" class="form-control"onkeyUP="validarCaja()"  onkeypress="LetrasEspacios()" maxlength="40">
         </div>
       </div>
       <div class="form-group">

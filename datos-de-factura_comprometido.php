@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
   include_once "funciones.php";
@@ -5,20 +6,25 @@
   $idform = $_GET['idform'];
   echo "$idform";
   $sql = sprintf("SELECT * FROM formato WHERE id = '%s'",$idform);
-
+  $formato = $link->query($sql);
+  $formato = mysqli_fetch_assoc($formato);
+  print_r($formato);
+  echo "<br>";
+  echo "id:".$formato['id'];
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type='text/javascript' src='jquery-1.2.3.min.js'></script>
-<script type='text/javascript' src='menu.js'></script>
 <style type="text/css">
     table {
   border-collapse: collapse;
 }
 </style>
 </head>
+
 <body>
+
+
 <table width="950" border="0">
   <tr>
     <td width="154">&nbsp;</td>
@@ -42,7 +48,7 @@
         </tr>
         <tr>
           <td>UR</td>
-          <td colspan="4">23 INVERSIÓN EN OBRA PÚBLICA</td>
+          <td colspan="4"><?php echo "".$formato['ur']; ?></td>
         </tr>
         <tr>
           <td>PROG.</td>
@@ -50,7 +56,7 @@
         </tr>
         <tr>
           <td>ACC.</td>
-          <td colspan="4" style="text-transform:uppercase">GASTOS OPERATIVOS</td>
+          <td colspan="4" style="text-transform:uppercase"><?php echo "".$formato['acc']; ?></td>
         </tr>
         <tr>
           <td>P.E.C.</td>
@@ -60,7 +66,7 @@
         <tr>
           <td>OFICIO</td>
           <td>No.</td>
-          <td colspan="3">numero de oficio</td>
+          <td colspan="3"><?php echo "".$formato['oficio']; ?></td>
         </tr>
         <tr>
           <td>TIPO</td>
@@ -69,7 +75,7 @@
         </tr>
         <tr>
           <td>FECHA</td>
-          <td colspan="4"style="text-transform:uppercase; font-size:10px;">FECHA ACTUAL</td>
+          <td colspan="4"style="text-transform:uppercase; font-size:10px;"><?php echo date('Y-m-d'); ?></td>
         </tr>
       </table>
       <br />
@@ -88,7 +94,10 @@
       <p>&nbsp;</p>
       <table width="800" border="0">
         <tr>
-          <td>POR MEDIO DE LA PRESENTE QUE CON ESTA FECHA DEBERA ORIGINAR EL REGISTRO CONTABLE PARA COMPROMETER EL PRESUPUESTO DE EGRESOS, QUE CONFORMA EL PRESUPUESTO APROBADO PARA EL EJERCICIO FISCAL DE año fiscal, EN LO CORRESPONDIENTE AL MES DE: mes DEL PRESENTE AÑO EN LA PARTIDA PRESUPUESTAL:</td>
+          <?php
+              $mes = array("01"=>"ENERO", "02"=>"FEBRERO", "03"=>"MARZO", "04"=>"ABRIL", "05"=>"MAYO", "06"=>"JUNIO", "07"=>"JULIO", "08"=>"AGOSTO", "09"=>"SEPTIEMBRE", "10"=>"OCTUBRE", "11"=>"NOVIEMBRE", "12"=>"DICIEMBRE");
+           ?>
+          <td>POR MEDIO DE LA PRESENTE QUE CON ESTA FECHA DEBERA ORIGINAR EL REGISTRO CONTABLE PARA COMPROMETER EL PRESUPUESTO DE EGRESOS, QUE CONFORMA EL PRESUPUESTO APROBADO PARA EL EJERCICIO FISCAL DE <?php echo "".$formato['afiscal']; ?>, EN LO CORRESPONDIENTE AL MES DE <?php echo "".$mes[date(m)]; ?> DEL PRESENTE AÑO EN LA PARTIDA PRESUPUESTAL:</td>
         </tr>
       </table>
       <br />
@@ -98,8 +107,15 @@
           <td width="666">DESCRIPCIÓN DE LA CUENTA</td>
         </tr>
         <tr>
-          <td>cog cuenta</td>
-          <td>descripción de la cuenta</td>
+          <td><?php echo "".$formato['id_cog']; ?></td>
+          <td><?php
+              $sql = "SELECT nombre FROM cog where id ='".$formato['id_cog']."'";
+              $result = $link->query($sql);
+              $desc = mysqli_fetch_assoc($result);
+             echo "".$desc['nombre'];
+
+
+           ?></td>
         </tr>
       </table>
       <br />
@@ -110,7 +126,9 @@
         </tr>
         <tr>
           <td>CORRESPONDIENTE A:</td>
-          <td>descripcion</td>
+          <td><?php
+            echo "".$formato['descripcion'];
+           ?></td>
         </tr>
       </table>
       <br />
@@ -124,7 +142,7 @@
       <br />
       <table width="800" border="1">
         <tr>
-          <td width="172">cantida en numero</td>
+          <td width="172"><?php echo "".$formato['cantidad']; ?></td>
           <td width="612" style="text-transform:uppercase">cantidad en letras</td>
         </tr>
       </table>
