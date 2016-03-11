@@ -14,14 +14,15 @@
    <?php
   include_once "../funciones.php";
    $link = Conectarse();
+   ##print_r($_POST);
    if(isset($_POST['nombre']) && !empty($_POST['nombre']) && isset($_POST['director']) && !empty($_POST['director']) && isset($_POST['recibe']) && !empty($_POST['recibe']) ){
    	  $nombre = $_POST['nombre'];
       $director =  $_POST['director'];
       $recibe = $_POST['recibe'];
-      $sql = "INSERT INTO cog(id,nombre,director,recibe) values('','$nombre','$director','$recibe')";
+      $sql = "INSERT INTO oficinas(nombre,director,recibe) values('$nombre','$director','$recibe')";
       $link->query($sql);
       $link->close();
-      header('Location: ../formoficinas.php');
+      header('Location: ../formOficinas.php');
    }else{
       echo "debe de llenar todos los campos";
    }

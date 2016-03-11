@@ -11,7 +11,7 @@
   <title>Nuevo Registro Proveedores</title>
 </head>
 <body>
-    <form class="form-horizontal" action="crear_usuarios.php" method="post" id="form">
+    <form class="form-horizontal" action="registros/registrarProveedor.php" method="post" id="form">
       <h1>Registrar Proveedores</h1>
       <br>
       <div class="form-group">
