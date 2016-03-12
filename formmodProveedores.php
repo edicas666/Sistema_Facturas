@@ -1,3 +1,12 @@
+<?php
+  $id=$_GET['id'];
+  include_once "funciones.php";
+  $link = Conectarse();
+  $sql = sprintf("SELECT * FROM proveedores WHERE id='%s'",$id);
+  $result = $link->query($sql);
+  $fila = mysqli_fetch_assoc($result);
+  $link->close();
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,27 +16,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/reg_usuario.css">
   <script type="text/javascript" src="js/funciones.js"></script>
+  <script src="js/funciones.js"></script>
+  <script src="js/jquery-1.12.1.min.js"></script>
   <title>Modificar Proveedores</title>
 </head>
 <body>
-    <form class="form-horizontal" action="crear_usuarios.php" method="post" id="form">
+    <form class="form-horizontal" action="modificar/modProveedor.php" method="post" id="form">
+      <input type="hidden"  name="idmod" value="<?php echo "$id"; ?>">
       <h1>Modificar Proveedores</h1>
       <br>
       <div class="form-group">
-        <label for="nombre" class="col-sm-2">* RFC:</label>
+        <label for="nombre" class="col-sm-2">* Rfc:</label>
         <div class="col-sm-10">
-          <input type="text" id="rfc" name="rfc" value="" placeholder="CUPU800825569"class="form-control" onkeypress="LetrasNumeros()" maxlength="15">
+          <input type="text" id="id" name="id" value="<?php  echo "".$fila['id'];?>" placeholder="CUPU800825569"class="form-control" onkeypress="LetrasNumeros()" maxlength="15"  onkeyup="validarCaja()">
         </div>
       </div>
       <div class="form-group">
         <label for="apaterno" class="col-sm-2">* Nombre:</label>
         <div class="col-sm-10">
-          <input type="text" id="nombre" name="nombre" value="" placeholder="Persona u organización" class="form-control" onkeypress="LetrasEspacios()" maxlength="40">
+          <input type="text" id="nombre" name="nombre" value="<?php  echo "".$fila['nombre'];?>" placeholder="Persona u organización" class="form-control" onkeypress="LetrasEspacios()" maxlength="40"  onkeyup="validarCaja()">
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
-          <button id="btnmod" type="button" class="btn btn-success" onclick="Modificar()">Modificar</button>
+          <button id="btnmod" type="button" class="btn btn-success" disabled onclick="Modificar()">Modificar</button>
           <button type="button" onclick="history.back()" class="btn btn-default">Regresar</button>
         </div>
       </div>
@@ -47,12 +59,13 @@ function validarCaja() {
 		            });
 		        }
 		    });
-		    if($("#rfc").val().length> 0 && $("#nombre").val().length> 0){
+		    if($("#id").val().length> 0 && $("#nombre").val().length> 0){
 		    	 $('#btnmod').disable(false);
 		    }else{
 		    	$('#btnmod').disable(true);
         }
 		});
+
 		}
 
   function Modificar(){

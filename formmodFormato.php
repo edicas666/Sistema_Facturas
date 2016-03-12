@@ -1,3 +1,12 @@
+<?php
+  $id=$_GET['id'];
+  include_once "funciones.php";
+  $link = Conectarse();
+  $sql = sprintf("SELECT * FROM formato WHERE id='%s'",$id);
+  $result = $link->query($sql);
+  $fila = mysqli_fetch_assoc($result);
+  $link->close();
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,72 +16,104 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/reg_usuario.css">
   <script type="text/javascript" src="js/funciones.js"></script>
+  <script src="js/funciones.js"></script>
+  <script src="js/jquery-1.12.1.min.js"></script>
   <title>Modificar Formato</title>
 </head>
 <body>
-    <form class="form-horizontal" action="crear_usuarios.php" method="post" id="form">
-      <h1>Formato</h1>
+    <form class="form-horizontal" action="modificar/modFormato.php" method="post" id="form">
+      <input type="hidden" name="idmod" value="<?php echo "$id"; ?>">
+      <h1>Modificar Formato</h1>
       <br>
       <div class="form-group">
-        <label for="nombre" class="col-sm-2">Nombre(s):</label>
+        <label for="ur" class="col-sm-2">* Ur:</label>
         <div class="col-sm-10">
-          <input type="text" name="nombre" value="" placeholder="Gerardo" class="form-control" onkeypress="LetrasEspacios()" maxlength="40">
+          <input id="ur" name="ur" type="text"  value="<?php echo "".$fila['ur']; ?>" placeholder="Dirección de comunicación social" class="form-control" onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="40">
         </div>
       </div>
       <div class="form-group">
-        <label for="apaterno" class="col-sm-2">Apellido Paterno:</label>
+        <label for="acc" class="col-sm-2">* Acc:</label>
         <div class="col-sm-10">
-          <input type="text" name="apaterno" value="" placeholder="Ruiz" class="form-control" onkeypress="validarLetras()" maxlength="14">
+          <input type="text"  id="acc" name="acc"  value="<?php echo "".$fila['acc']; ?>" placeholder="Gastos operativos" class="form-control"  onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="14">
         </div>
       </div>
       <div class="form-group">
-        <label for="amaterno" class="col-sm-2">Apellido Materno:</label>
+        <label for="oficio" class="col-sm-2">  Oficio:</label>
         <div class="col-sm-10">
-          <input type="text" name="amaterno" value="" placeholder="Pérez" class="form-control" onkeypress="validarLetras()" maxlength="14">
+          <input type="text" id="oficio" name="oficio"  value="<?php echo "".$fila['oficio']; ?>" placeholder="Descripción del oficio" class="form-control" onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="14">
         </div>
       </div>
       <div class="form-group">
-        <label for="email" class="col-sm-2">Email:</label>
+        <label for="anio" class="col-sm-2">* Año fiscal:</label>
         <div class="col-sm-10">
-          <input type="text" name="email" value="" placeholder="usuario@gmail.com"
-           class="form-control" onKeyUp="javascript:validateMail('id_mail')" 
-           required name="emailClie" id="id_mail" maxlength="50" 
-           pattern="[a-zA-Z0-9_-]+([.][a-zA-Z0-9_-]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" 
-           min="8">
+            <select id="afiscal" name="afiscal"  value="<?php echo "".$fila['afiscal']; ?>" class="form-control"  required onclick="validarCaja()" onkeyUP="validarCaja()">
+              <option value="a" selected>Selecionar año</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+            </select>
         </div>
       </div>
       <div class="form-group">
-        <label for="deptotxt" class="col-sm-2">* Departamento:</label>
+        <label for="codigotxt" class="col-sm-2">* Cog:</label>
         <div class="col-sm-10">
-          <select class="form-control" name="depto" required>
-            <option value="presidencia">Presidencia</option>
-            <option value="tesoreria">Tesoreria</option>
-            <option value="oficialia">Oficialia</option>
+          <select id="codigo" name="id_cog"  value="<?php echo "".$fila['id_cog']; ?>" class="form-control"  required onclick="validarCaja()" onkeyUP="validarCaja()">
+            <option value="a">Seleccionar código</option>
+            <?php
+              include_once "funciones.php";
+              $link = Conectarse();
+
+              ?>
+              <?php
+                $sql = "SELECT id FROM cog ORDER BY id ASC";
+                $result=$link->query($sql);
+                while($codigo = mysqli_fetch_assoc($result)) {
+             ?>
+                <option value = "<?php echo $codigo['id']; ?>"><?php echo $codigo['id']; ?></option>
+             <?php
+              }
+              $link->close();
+            ?>
           </select>
         </div>
       </div>
       <div class="form-group">
-        <label for="usuario" class="col-sm-2">* Nombre de usuario:</label>
+        <label for="descripcion" class="col-sm-2">* Descripción:</label>
         <div class="col-sm-10">
-          <input type="text" name="user" required value="" placeholder="gera23" class="form-control" onkeypress="LetrasNumeros()" maxlength="40" >
+          <input type="text" id="descripcion" name="descripcion"  value="<?php echo "".$fila['descripcion']; ?>" required placeholder="Descripción de la cuenta" class="form-control"onkeyUP="validarCaja()"  onkeypress="LetrasEspacios()" maxlength="40">
         </div>
       </div>
       <div class="form-group">
-        <label for="pass" class="col-sm-2">* Contraseña:</label>
+        <label for="cantidad" class="col-sm-2">* Cantidad:</label>
         <div class="col-sm-10">
-          <input type="password" name="pass1" required class="form-control" id="pass" placeholder="*****" maxlength="80">
+          <input type="cantidad" id="cantidad" name="cantidad"   value="<?php echo "".$fila['cantidad']; ?>" required class="form-control"  onkeyUP="validarCaja()" onkeypress="validarNumeros()"placeholder="100" maxlength="80">
         </div>
       </div>
       <div class="form-group">
-        <label for="pass2" class="col-sm-2">* Confirmar contraseña:</label>
+        <label for="codigotxt" class="col-sm-2">* Oficina:</label>
         <div class="col-sm-10">
-          <input type="password" name="pass2" required class="form-control" id="pass2" placeholder="*****" maxlength="80">
+          <select class="form-control" id="oficina" name="id_oficina"  value="<?php echo "".$fila['id_oficina']; ?>" required onclick="validarCaja()" onkeyUP="validarCaja()">
+            <option value="a">Seleccionar oficina</option>
+            <?php
+              $link = Conectarse();
+              ?>
+              <?php
+                $sql = "SELECT nombre,id FROM oficinas ORDER BY nombre ASC";
+                $result=$link->query($sql);
+                while($codigo = mysqli_fetch_assoc($result)) {
+             ?>
+                <option value = "<?php echo $codigo['id']; ?>"><?php echo $codigo['nombre']; ?></option>
+             <?php
+              }
+              $link->close();
+            ?>
+          </select>
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
-          <button id="registrarbtn" type="button" class="btn btn-success" onclick="Modificar()">Modificar</button>
-          <button type="button" onclick="hitory.back()" class="btn btn-default">Regresar</button>
+         <button id="btnmod"  class="btn btn-success" disabled onclick="modificar()">Modificar</button>
+         <button  onclick="history.back()" class="btn btn-default">Regresar</button>
         </div>
       </div>
       <div class="form-group">
@@ -82,29 +123,34 @@
 </body>
 </html>
 <script type="text/javascript">
-	function validarCaja() {
-			$(function() {
-		    jQuery.fn.extend({
-		        disable: function(state) {
-		            return this.each(function() {
-		                this.disabled = state;
-		            });
-		        }
-		    });
-		    if($("#idCuenta").val().length> 0 && $("#descripcion").val().length> 0 &&  $("#capitulo").val().length> 0){
-		    	 $('#btnReg').disable(false);
+function validarCaja() {
+    $(function() {
+      jQuery.fn.extend({
+          disable: function(state) {
+              return this.each(function() {
+                  this.disabled = state;
+              });
+          }
+      });
 
-		    }else{
-		    	$('#btnReg').disable(true);
+        if($("#ur").val().length> 0 &&
+        $("#acc").val().length> 0 &&
+        $("#oficio").val().length> 0 &&
+        $("#descripcion").val().length> 0 &&
+        $("#cantidad").val().length>0 &&
+        $("#afiscal").val() != "a" &&
+        $("#codigo").val() != "a" &&
+        $("#oficina").val() != "a"){
+              $('#btnmod').disable(false);
+      }else{
+        $('#btnmod').disable(true);
+      }
 
-		    }
-
-		});
-		}
-
-  function Modificar(){
-    if(confirm("¿Esta seguro?")){
+  });
+  }
+  function modificar(){
+    if(confirm("¿Esta seguro de proceder?")){
       document.getElementById('form').submit();
     }
-  }
+}
 </script>

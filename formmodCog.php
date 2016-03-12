@@ -19,13 +19,14 @@
   <title>Modificar COG</title>
 </head>
 <body>
-    <form class="form-horizontal" action="modificar/modoficinas.php" method="post" id="form">
+    <form class="form-horizontal" action="modificar/modcog.php" method="post" id="form">
+      <input type="hidden" name="idmod" value="<?php echo "$id"; ?>">
       <h1>Modificar COG</h1>
       <br>
       <div class="form-group">
         <label for="idCuenta" class="col-sm-2">* Cuenta:</label>
         <div class="col-sm-10">
-          <input id="idCuenta" type="text" name="nombre" value="<?php echo "$id"; ?>" placeholder="ejemplo: 10000-11301"class="form-control"
+          <input id="idCuenta" type="text" name="cuenta" value="<?php echo "$id"; ?>" placeholder="ejemplo: 10000-11301"class="form-control"
           onKeyUp="javascript:validarCuenta('idCuenta')" maxlength="50">
         </div>
       </div>

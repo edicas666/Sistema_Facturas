@@ -13,6 +13,6 @@
     print_r($_POST);
     header('Location: ../consultaGen.php?valor=oficinas&bus=no');
  }else{
-    echo "debe de llenar todos los campos";
+    echo "<script>alert('Debe llenar todos los campos')</script>";
  }
 ?>

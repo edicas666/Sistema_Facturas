@@ -27,21 +27,16 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="oficio" class="col-sm-2">* Oficio:</label>
+        <label for="oficio" class="col-sm-2">  Oficio:</label>
         <div class="col-sm-10">
           <input type="text" id="oficio" name="oficio" placeholder="Descripción del oficio" class="form-control" onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="14">
         </div>
       </div>
       <div class="form-group">
-        <label for="fecha" class="col-sm-2">* Fecha:</label>
-          <div class="col-sm-10">
-            <input  disabled="" type="datetime" id="fecha" name="fecha" value="<?php echo date("Y-m-d");?>" class="form-control">
-          </div>
-      </div>
-      <div class="form-group">
-        <label for="anioFiscal" class="col-sm-2">* Año fiscal:</label>
+        <label for="anio" class="col-sm-2">* Año fiscal:</label>
         <div class="col-sm-10">
-            <select class="form-control" name="id_oficina" required>
+            <select id="anioFiscal" name="anioFiscal" class="form-control" name="id_oficina" required onclick="validarCaja()">
+              <option value="a" selected>Selecionar año</option>
               <option value="2016">2016</option>
               <option value="2017">2017</option>
               <option value="2018">2018</option>
@@ -49,7 +44,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="deptotxt" class="col-sm-2">* Id_cog:</label>
+        <label for="codigotxt" class="col-sm-2">* Cog:</label>
         <div class="col-sm-10">
           <select id="codigo" name="codigo" class="form-control" name="id_cog" required onclick="validarCaja()">
             <option value="a">Seleccionar código</option>
@@ -80,16 +75,27 @@
       <div class="form-group">
         <label for="cantidad" class="col-sm-2">* Cantidad:</label>
         <div class="col-sm-10">
-          <input type="cantidad" id="cantidad" name="cantidad" required class="form-control"  onkeyUP="validarCaja()" placeholder="100" maxlength="80">
+          <input type="cantidad" id="cantidad" name="cantidad" required class="form-control"  onkeyUP="validarCaja()" onkeypress="validarNumeros()"placeholder="100" maxlength="80">
         </div>
       </div>
       <div class="form-group">
-        <label for="deptotxt" class="col-sm-2">* Id_oficina:</label>
+        <label for="codigotxt" class="col-sm-2">* Oficina:</label>
         <div class="col-sm-10">
-          <select class="form-control" name="id_oficina" required>
-            <option value="presidencia">codigo1</option>
-            <option value="tesoreria">codigo2</option>
-            <option value="oficialia">codigo3</option>
+          <select class="form-control" id="oficina" name="oficina" required onclick="validarCaja()">
+            <option value="a">Seleccionar oficina</option>
+            <?php
+              $link = Conectarse();
+              ?>
+              <?php
+                $sql = "SELECT nombre,id FROM oficinas ORDER BY nombre ASC";
+                $result=$link->query($sql);
+                while($codigo = mysqli_fetch_assoc($result)) {
+             ?>
+                <option value = "<?php echo $codigo['id']; ?>"><?php echo $codigo['nombre']; ?></option>
+             <?php
+              }
+              $link->close();
+            ?>
           </select>
         </div>
       </div>
@@ -115,12 +121,15 @@ function validarCaja() {
               });
           }
       });
+
         if($("#ur").val().length> 0 &&
         $("#acc").val().length> 0 &&
         $("#oficio").val().length> 0 &&
-        $("#fecha").val().length> 0  &&
         $("#descripcion").val().length> 0 &&
-        $("#cantidad1").val().length==0){
+        $("#cantidad").val().length>0 &&
+        $("#anioFiscal").val() != "a" &&
+        $("#codigo").val() != "a" &&
+        $("#oficina").val() != "a"){
               $('#btnReg').disable(false);
       }else{
         $('#btnReg').disable(true);
@@ -128,7 +137,6 @@ function validarCaja() {
 
   });
   }
-
   function registrar(){
     if(confirm("¿Esta seguro de proceder?")){
       document.getElementById('form').submit();
