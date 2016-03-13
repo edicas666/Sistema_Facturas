@@ -89,7 +89,7 @@
           $id=$renglo['id'];
   	      echo "<td><input type='button' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('mod');\" onclick=\"formmodelim.submit();\" class='btn btn-warning' value ='Modificar'></td>";
   	      echo "<td>"."<input type='button' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('elim');\" onclick=\"if(confirm('esta seguro?')){formmodelim.submit();}\" class='btn btn-danger' value ='Eliminar'>"."</td>";
-  	      echo "<td>"."<input type='button' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('form');\" onclick=\"formmodelim.submit();\" class='btn btn-primary' value ='Formato'>"."</td>";
+  	      echo "<td>"."<input type='button' data-toggle='tooltip' data-placement='right' title='Generar formato' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('form');\" onclick=\"formmodelim.submit();\" class='btn btn-primary' value ='Formato'>"."</td>";
   	      echo "</tr>";
   	    }
   	    echo "</table>";
