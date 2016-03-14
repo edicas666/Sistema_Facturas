@@ -73,7 +73,7 @@
   	    	echo "<th>".$fila['Field']."</th>";
   	    }
         mysqli_free_result($result);
-  	    echo "<th colspan='2'></th></tr></thead>";
+  	    echo "<th colspan='3'></th></tr></thead>";
         //datos
         if($bus=='yes'){
           $ren=buscar($tabla,$buscampo,$bustxt);
