@@ -42,7 +42,7 @@
 	<form action="buscar.php" name="fromBuscar" method="get">
 		<div class="form-group">
       <label for="selectCampo">Campo:</label>
-			<select id="selectCampo">
+			<select id="selectCampo" data-toggle='tooltip' data-placement='right' title='Filtrar por'>
         <?php
           $result=consultarcampos($tabla);
           while ($fila=mysqli_fetch_assoc($result)) {
@@ -51,11 +51,11 @@
           mysqli_free_result($result);
          ?>
 			</select>
-		  <input type="text" placeholder="Buscar..." name="bustxt" id="busTxt">
+		  <input type="text" placeholder="Buscar..."  name="bustxt" id="busTxt">
       <input type="hidden" name="tabla" value="<?php echo $tabla; ?>">
       <input type="hidden" name="campo" id="idcampo" value="">
-		  <button id="btnBuscar" onmouseover="$('#idcampo').val($('#selectCampo').val())" class="btn btn-info">Buscar</button>
-      <a class="btn btn-success" id="agregar" href="#">Agregar</a>
+		  <button id="btnBuscar" data-toggle='tooltip' data-placement='right' title='Buscar' onmouseover="$('#idcampo').val($('#selectCampo').val())" class="btn btn-info">Buscar</button>
+      <a class="btn btn-success" data-toggle='tooltip' data-placement='right' title='Agregar' id="agregar" href="#">Agregar</a>
 		</div>
     </form>
     <hr>
@@ -87,10 +87,12 @@
   	    	    echo "<td>".$renglo[$fila['Field']]."</td>";
   	      }
           $id=$renglo['id'];
-  	      echo "<td><input type='button' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('mod');\" onclick=\"formmodelim.submit();\" class='btn btn-warning' value ='Modificar'></td>";
-  	      echo "<td>"."<input type='button' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('elim');\" onclick=\"if(confirm('esta seguro?')){formmodelim.submit();}\" class='btn btn-danger' value ='Eliminar'>"."</td>";
-  	      echo "<td>"."<input type='button' data-toggle='tooltip' data-placement='right' title='Generar formato' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('form');\" onclick=\"formmodelim.submit();\" class='btn btn-primary' value ='Formato'>"."</td>";
-  	      echo "</tr>";
+  	      echo "<td><input type='button' data-toggle='tooltip' data-placement='right' title='Modificar formato' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('mod');\" onclick=\"formmodelim.submit();\" class='btn btn-warning' value ='Modificar'></td>";
+  	      echo "<td>"."<input type='button' data-toggle='tooltip' data-placement='right' title='Eliminar formato' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('elim');\" onclick=\"if(confirm('esta seguro de eliminar registro?')){formmodelim.submit();}\" class='btn btn-danger' value ='Eliminar'>"."</td>";
+          if($tabla == "formato"){
+            echo "<td>"."<input type='button' data-toggle='tooltip' data-placement='right' title='Generar formato' onmouseover=\"$('#idfila').val('$id');$('#idopcion').val('form');\" onclick=\"formmodelim.submit();\" class='btn btn-primary' value ='Formato'>"."</td>";
+          }
+          echo "</tr>";
   	    }
   	    echo "</table>";
       ?>

@@ -18,7 +18,7 @@
         <label for="nombre" class="col-sm-2">* Cuenta:</label>
         <div class="col-sm-10">
           <input id="idCuenta" type="text" name="cuenta"  placeholder="ejemplo: 10000-11301"
-          class="form-control" onkeypress="validarCaja()" onKeyUp="javascript:validarCuenta('idCuenta')" maxlength="50">
+          class="form-control" onkeypress="validarCaja()" onKeyUp="javascript:validarCuenta('idCuenta')" maxlength="11">
         </div>
       </div>
       <div class="form-group">

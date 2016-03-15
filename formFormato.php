@@ -23,13 +23,13 @@
       <div class="form-group">
         <label for="acc" class="col-sm-2">* Acc:</label>
         <div class="col-sm-10">
-          <input type="text"  id="acc" name="acc" value="" placeholder="Gastos operativos" class="form-control"  onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="14">
+          <input type="text"  id="acc" name="acc" value="" placeholder="Gastos operativos" class="form-control"  onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="20">
         </div>
       </div>
       <div class="form-group">
         <label for="oficio" class="col-sm-2">  Oficio:</label>
         <div class="col-sm-10">
-          <input type="text" id="oficio" name="oficio" placeholder="Descripción del oficio" class="form-control" onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="14">
+          <input type="text" id="oficio" name="oficio" placeholder="Descripción del oficio" class="form-control" onkeyUP="validarCaja()" onkeypress="LetrasEspacios()" maxlength="50">
         </div>
       </div>
       <div class="form-group">
@@ -69,13 +69,13 @@
       <div class="form-group">
         <label for="descripcion" class="col-sm-2">* Descripción:</label>
         <div class="col-sm-10">
-          <input type="text" id="descripcion" name="descripcion" required placeholder="Descripción de la cuenta" class="form-control"onkeyUP="validarCaja()"  onkeypress="LetrasEspacios()" maxlength="40">
+          <input type="text" id="descripcion" name="descripcion" required placeholder="Descripción de la cuenta" class="form-control"onkeyUP="validarCaja()"  onkeypress="LetrasEspacios()" maxlength="60">
         </div>
       </div>
       <div class="form-group">
         <label for="cantidad" class="col-sm-2">* Cantidad:</label>
         <div class="col-sm-10">
-          <input type="cantidad" id="cantidad" name="cantidad" required class="form-control"  onkeyUP="validarCaja()" onkeypress="validarNumeros()"placeholder="100" maxlength="80">
+          <input type="cantidad" id="cantidad" name="cantidad" required class="form-control"  onkeyUP="validarCaja()" onkeypress="validarNumeros()"placeholder="100" maxlength="12">
         </div>
       </div>
       <div class="form-group">

@@ -27,7 +27,7 @@
         <label for="idCuenta" class="col-sm-2">* Cuenta:</label>
         <div class="col-sm-10">
           <input id="idCuenta" type="text" name="cuenta" value="<?php echo "$id"; ?>" placeholder="ejemplo: 10000-11301"class="form-control"
-          onKeyUp="javascript:validarCuenta('idCuenta')" maxlength="50">
+          onKeyUp="javascript:validarCuenta('idCuenta')" maxlength="11">
         </div>
       </div>
       <div class="form-group">
