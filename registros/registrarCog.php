@@ -8,7 +8,7 @@
       $sql = "INSERT INTO cog(id,nombre,capitulo) values('$cuenta','$nombre','$capitulo')";
       $link->query($sql);
       $link->close();
-      header('Location: ../formcog.php');
+      header('Location: ../consultaGen.php?valor=cog&bus=no');
    }else{
       echo "debe de llenar todos los campos";
    }

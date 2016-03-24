@@ -23,7 +23,7 @@
         echo "Error: ".mysqli_error($link);
       }
       $link->close();
-      header('Location: ../formFormato.php');
+        header('Location: ../consultaGen.php?valor=formato&bus=no');
     }else{
       echo "debe de llenar todos los campos";
     }

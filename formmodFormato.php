@@ -48,7 +48,7 @@
         <div class="col-sm-10">
             <select id="afiscal" name="afiscal"  value="<?php echo "".$fila['afiscal']; ?>" class="form-control"  required onclick="validarCaja()" onkeyUP="validarCaja()">
               <option value="a" selected>Selecionar año</option>
-              <option value="2016">2016</option>
+              <option value="2016">2016 </option>
               <option value="2017">2017</option>
               <option value="2018">2018</option>
             </select>
@@ -59,12 +59,8 @@
         <div class="col-sm-10">
           <select id="codigo" name="id_cog"  value="<?php echo "".$fila['id_cog']; ?>" class="form-control"  required onclick="validarCaja()" onkeyUP="validarCaja()">
             <option value="a">Seleccionar código</option>
-            <?php
-              include_once "funciones.php";
-              $link = Conectarse();
-
-              ?>
               <?php
+              $link = Conectarse();
                 $sql = "SELECT id FROM cog ORDER BY id ASC";
                 $result=$link->query($sql);
                 while($codigo = mysqli_fetch_assoc($result)) {
@@ -94,10 +90,8 @@
         <div class="col-sm-10">
           <select class="form-control" id="oficina" name="id_oficina"  value="<?php echo "".$fila['id_oficina']; ?>" required onclick="validarCaja()" onkeyUP="validarCaja()">
             <option value="a">Seleccionar oficina</option>
-            <?php
-              $link = Conectarse();
-              ?>
               <?php
+              $link = Conectarse();
                 $sql = "SELECT nombre,id FROM oficinas ORDER BY nombre ASC";
                 $result=$link->query($sql);
                 while($codigo = mysqli_fetch_assoc($result)) {
@@ -113,7 +107,7 @@
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
          <button id="btnmod"  class="btn btn-success" disabled onclick="modificar()">Modificar</button>
-         <button  onclick="history.back()" class="btn btn-default">Regresar</button>
+         <button  onclick="window.location='consultaGen.php?valor=formato&bus=no';" class="btn btn-default">Regresar</button>
         </div>
       </div>
       <div class="form-group">
@@ -152,5 +146,11 @@ function validarCaja() {
     if(confirm("¿Esta seguro de proceder?")){
       document.getElementById('form').submit();
     }
-}
+  }
+
+  $(document).ready(function(){
+    $('#afiscal').val('<?php echo $fila['afiscal']?>');
+    $('#codigo').val('<?php echo $fila['id_cog']?>');
+    $('#oficina').val('<?php echo $fila['id_oficina']?>');
+  });
 </script>

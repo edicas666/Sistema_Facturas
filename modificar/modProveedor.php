@@ -6,7 +6,7 @@
 	  $id = $_POST['id'];
     $nombre =  $_POST['nombre'];
     $idtab = $_POST['idmod'];
-    $sql = "UPDATE proveedores SET id='$id', nombre='$nombre' WHERE id='$idtab'";
+    $sql = "UPDATE proveedores SET rfc='$id', nombre='$nombre' WHERE id='$idtab'";
     $link->query($sql);
     $link->close();
     print_r($_POST);

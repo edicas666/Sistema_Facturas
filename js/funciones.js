@@ -55,8 +55,24 @@ function LetrasEspacios(){
 }
 
 function LetrasNumeros(){
-    if (event.keyCode >=65 && event.keyCode <=90 || event.keyCode >=97 && event.keyCode <= 122
-    || event.keyCode >=48 && event.keyCode <=57 || event.keyCode ==  165){
+    if (event.keyCode >=65 && event.keyCode <=90 ||
+      event.keyCode >=97 && event.keyCode <= 122 ||
+      event.keyCode >=48 && event.keyCode <=57 ||
+      event.keyCode ==  165 ||
+      event.keyCode == 32 ||
+      event.keyCode ==  241 ||
+      event.keyCode == 180 ||
+      event.keyCode == 225 ||
+      event.keyCode == 233 ||
+      event.keyCode == 237 ||
+      event.keyCode == 243 ||
+      event.keyCode == 250 ||
+      event.keyCode == 193 ||
+      event.keyCode == 201 ||
+      event.keyCode == 205 ||
+      event.keyCode == 211 ||
+      event.keyCode == 218 ||
+      event.keyCode == 209){
      event.returnValue = true
     }else{
         event.returnValue = 0;

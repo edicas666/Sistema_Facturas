@@ -28,7 +28,7 @@
       <div class="form-group">
         <label for="nombre" class="col-sm-2">* Rfc:</label>
         <div class="col-sm-10">
-          <input type="text" id="id" name="id" value="<?php  echo "".$fila['id'];?>" placeholder="CUPU800825569"class="form-control" onkeypress="LetrasNumeros()" maxlength="15"  onkeyup="validarCaja()">
+          <input type="text" id="id" name="id" value="<?php  echo "".$fila['rfc'];?>" placeholder="CUPU800825569"class="form-control" onkeypress="LetrasNumeros()" maxlength="15"  onkeyup="validarCaja()">
         </div>
       </div>
       <div class="form-group">
@@ -40,7 +40,7 @@
       <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
           <button id="btnmod" type="button" class="btn btn-success" disabled onclick="Modificar()">Modificar</button>
-          <button type="button" onclick="history.back()" class="btn btn-default">Regresar</button>
+          <button type="button" onclick="window.location='consultaGen.php?valor=proveedores&bus=no';" class="btn btn-default">Regresar</button>
         </div>
       </div>
       <div class="form-group">

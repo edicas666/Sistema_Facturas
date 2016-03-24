@@ -9,7 +9,7 @@
     $sql = "INSERT INTO oficinas(nombre,director,recibe) values('$nombre','$director','$recibe')";
     $link->query($sql);
     $link->close();
-    header('Location: ../formOficinas.php');
+      header('Location: ../consultaGen.php?valor=oficinas&bus=no');
  }else{
     echo "debe de llenar todos los campos";
  }

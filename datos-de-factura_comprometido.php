@@ -10,6 +10,12 @@
   $result = $link->query($sql1);
   $desc = mysqli_fetch_assoc($result);
   ob_start();
+  #Foranea
+  $sql2 = "SELECT nombre,director FROM oficinas where  id ='".$formato['id_oficina']."'";
+  $result1=$link->query($sql2);
+  $datos = mysqli_fetch_assoc($result1);
+
+
   $content = "
 <page>
 <table width='100%' border='0'>
@@ -30,7 +36,7 @@
         </tr>
         <tr>
           <td>UR</td>
-          <td colspan='4'>".$formato['ur']."</td>
+          <td colspan='4'  style='text-transform:uppercase'>".$formato['ur']."</td>
         </tr>
         <tr>
           <td>PROG.</td>
@@ -48,7 +54,7 @@
         <tr>
           <td>OFICIO</td>
           <td>No.</td>
-          <td colspan='3'>".$formato['oficio']."</td>
+          <td colspan='3'  style='text-transform:uppercase'> ".$formato['oficio']."</td>
         </tr>
         <tr>
           <td>TIPO</td>
@@ -57,7 +63,7 @@
         </tr>
         <tr>
           <td>FECHA</td>
-          <td colspan='4'style='text-transform:uppercase; font-size:10px;'>".date('Y-m-d')."</td>
+          <td colspan='4'style='text-transform:uppercase'>".date('Y-m-d')."</td>
         </tr>
       </table>
       <br />
@@ -76,7 +82,7 @@
       <p>&nbsp;</p>
       <table width='800' border='0'>
         <tr>
-          <td>POR MEDIO DE LA PRESENTE QUE CON ESTA FECHA DEBERA ORIGINAR EL REGISTRO CONTABLE PARA COMPROMETER EL PRESUPUESTO DE EGRESOS, QUE CONFORMA EL PRESUPUESTO APROBADO PARA EL EJERCICIO FISCAL DE".$formato['afiscal'].", EN LO CORRESPONDIENTE AL MES DE ".$mes[date(m)]." DEL PRESENTE AÑO EN LA PARTIDA PRESUPUESTAL:</td>
+          <td>POR MEDIO DE LA PRESENTE QUE CON ESTA FECHA DEBERA ORIGINAR EL REGISTRO CONTABLE PARA COMPROMETER EL PRESUPUESTO DE EGRESOS, QUE CONFORMA EL PRESUPUESTO APROBADO PARA EL EJERCICIO FISCAL DE ".$formato['afiscal'].", EN LO CORRESPONDIENTE AL MES DE ".$mes[date(m)]." DEL PRESENTE AÑO EN LA PARTIDA PRESUPUESTAL:</td>
         </tr>
       </table>
       <br />
@@ -87,18 +93,18 @@
         </tr>
         <tr>
           <td>".$formato['id_cog']."</td>
-          <td>".$desc['nombre']."</td>
+          <td  style='text-transform:uppercase'>".$desc['nombre']."</td>
         </tr>
       </table>
       <br />
       <table width='700' border='1'>
         <tr>
           <td width='300'>DE LA UNIDAD RESPONSABLE DE:</td>
-          <td width='400'>unidad</td>
+          <td style='width: 400; text-transform:uppercase'>".$datos['nombre']."</td>
         </tr>
         <tr>
           <td>CORRESPONDIENTE A:</td>
-          <td>".$formato['descripcion']."</td>
+          <td  style='text-transform:uppercase'>".$formato['descripcion']."</td>
         </tr>
       </table>
       <br />
@@ -112,8 +118,8 @@
       <br />
       <table width='800' border='1'>
         <tr>
-          <td width='172'>".$formato['cantidad']."</td>
-          <td width='612' style='text-transform:uppercase'>cantidad en letras</td>
+          <td width='172'>$ ".$formato['cantidad']."</td>
+          <td  style=' width:400; text-transform:uppercase'>".numero($formato['cantidad'])."</td>
         </tr>
       </table>
       <br />
@@ -128,10 +134,10 @@
           <td align='center'>_______________________________________</td>
         </tr>
         <tr>
-          <td align='center'>nombre del director</td>
+          <td style='align: center; text-transform:uppercase'>".$datos['director']."</td>
         </tr>
         <tr>
-          <td align='center'>DIRECTOR DE oficina</td>
+          <td style='align: center; text-transform:uppercase'>DIRECTOR DE ".$datos['nombre']."</td>
         </tr>
       </table></td>
   </tr>
@@ -146,5 +152,5 @@
     require_once('html2pdf-4.03\html2pdf.class.php');
     $html2pdf = new HTML2PDF('P','A4','fr','UTF-8');
     $html2pdf->WriteHTML($content);
-    $html2pdf->Output('exemple.pdf');
+    $html2pdf->Output('factura_comprometido.pdf');
 ?>
